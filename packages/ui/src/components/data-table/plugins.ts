@@ -6,9 +6,9 @@ import tagsPlugin from "./plugins/tags.js";
 type Plugin<T> = ColumnDef<T>;
 
 export function createPlugins<T>(
-  plugins?: Plugin<T>[]
+  plugins?: any
 ): Record<
-  "text" | "number" | string,
+  "text" | "number" | "tags" | string,
   any // TODO: fix this type
   // <T>(name: string, headerName: string) => ColumnDef<T>
 > {

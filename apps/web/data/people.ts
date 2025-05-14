@@ -1,7 +1,7 @@
 import { faker } from "@faker-js/faker";
 
 export type Person = {
-  id: number;
+  id: [number, string];
   firstName: string;
   lastName: string;
   age: number;
@@ -21,7 +21,7 @@ const range = (len: number) => {
 
 const newPerson = (): Person => {
   return {
-    id: 0,
+    id: [0, "/people/0"],
     firstName: faker.person.firstName(),
     lastName: faker.person.lastName(),
     age: faker.number.int(40),
@@ -32,7 +32,10 @@ const newPerson = (): Person => {
       "complicated",
       "single",
     ])[0]!,
-    tags: faker.helpers.arrayElements(["fun", "energetic", "loud", "talented"], 2)
+    tags: faker.helpers.arrayElements(
+      ["fun", "energetic", "loud", "talented", "funny"],
+      2
+    ),
   };
 };
 
@@ -42,7 +45,7 @@ export function makeData(...lens: number[]) {
     return range(len).map((d, i): Person => {
       return {
         ...newPerson(),
-        id: i,
+        id: [i, `/people/${i}`],
       };
     });
   };
