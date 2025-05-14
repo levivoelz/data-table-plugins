@@ -5,6 +5,7 @@ import { LoaderCircle } from "lucide-react";
 
 // import { mapCellTypeToColumns } from "@/lib/table-helpers";
 import { makeData, type Person } from "@/data/people";
+import { peopleTableStructure } from "@/data/people-table-structure";
 import tableLinkPlugin from "@/lib/table-link-plugin";
 import { DataTable } from "@workspace/ui/components/data-table";
 import { createPlugins } from "@workspace/ui/components/data-table/plugins";
@@ -28,17 +29,11 @@ export function PersonTable() {
   //   );
   // }, [people]);
 
-  // or statically assign them. This is more efficient as it will only happen once
-  const columns = [
-    plugins.link("id", "ID"),
-    plugins.text("firstName", "First Name"),
-    plugins.text("lastName", "Last Name"),
-    plugins.number("age", "Age"),
-    plugins.number("visits", "Visits"),
-    plugins.number("progress", "Progress"),
-    plugins.text("status", "Status"),
-    plugins.tags("tags", "Tags")
-  ];
+  const columns = Object.keys(peopleTableStructure).map((k) => {
+    const col = peopleTableStructure[k]!;
+    const { name, type } = col;
+    return plugins[type](k, name);
+  });
 
   if (!people || !columns)
     return (
