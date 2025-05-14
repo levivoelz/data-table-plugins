@@ -21,8 +21,8 @@ export function mapCellTypeToColumns(row: Row): Col[] {
     const header = headers[i];
 
     if (header && row) {
-      const rowRawType = typeof cells[i];
-      const pluginType = mapTypeToPlugin(rowRawType);
+      const cellRawType = typeof cells[i];
+      const pluginType = mapTypeToPlugin(cellRawType, cells[i]);
 
       cols[i] = {
         name: header,
@@ -41,13 +41,19 @@ export function mapCellTypeToColumns(row: Row): Col[] {
  *
  * @todo This should somehow get the plugin from the list of plugins dynamically
  */
-function mapTypeToPlugin(type: string) {
+function mapTypeToPlugin(type: string, value: unknown) {
   if (type === "string") {
     return "text";
   }
 
   if (type === "number") {
     return "number";
+  }
+
+  if (type === "object") {
+    if (Array.isArray(value)) {
+      return "tags"
+    }
   }
 
   return "text";

@@ -12,10 +12,7 @@ function header<T>(name: string) {
   };
 }
 
-function createColumn<T>(
-  name: string,
-  headerName: string
-): ColumnDef<T> {
+function createColumn<T>(name: string, headerName: string) {
   return {
     accessorKey: name,
     header: header(headerName),

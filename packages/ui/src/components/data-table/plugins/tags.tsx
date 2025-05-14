@@ -2,7 +2,18 @@ import { type Row, type Column, type ColumnDef } from "@tanstack/react-table";
 
 function cell<T>(name: string) {
   return ({ row }: { row: Row<T> }) => {
-    return <div>{row.getValue(name)}</div>;
+    const cell = row.getValue(name) as string[];
+    return (
+      <div className="flex gap-2">
+        {cell.map((x) => {
+          return (
+            <span key={x} className="border px-2">
+              {x}
+            </span>
+          );
+        })}
+      </div>
+    );
   };
 }
 
@@ -20,4 +31,4 @@ function createColumn<T>(name: string, headerName: string): ColumnDef<T> {
   };
 }
 
-export default { text: createColumn };
+export default { tags: createColumn };

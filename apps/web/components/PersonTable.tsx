@@ -18,7 +18,8 @@ export function PersonTable() {
 
   const plugins = createPlugins<Person>();
 
-  // dynamically assign cell types
+  // dynamically assign cell types.
+  // TODO: this will recalculate every time people changes. The data shape and types should be determined once at a higher level
   const columns = React.useMemo(() => {
     if (!people) return null;
 
@@ -27,7 +28,7 @@ export function PersonTable() {
     );
   }, [people]);
 
-  // or statically assign them
+  // or statically assign them. This is more efficient as it will only happen once
   // const columns = [
   //   plugins.text("firstName", "First Name"),
   //   plugins.text("lastName", "Last Name")
