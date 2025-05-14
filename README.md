@@ -11,8 +11,8 @@ Next.js has some extra tools built in over a bare React project that makes it si
 ### shadcn/ui
 It's all the rage and for a good reason. It's frequently updated, has an extensive component repository, is highly curated, includes Tailwind, and follows the Headless UI pattern. You can stick to the script and use what is provided or you can easily customize your components by editing the source file.
 
-### Zod
-Zod is used to validate incoming JSON data and validate cell plugin data.
+### TanStack Table
+This library adds a powerful set of tools for data manipulation in a table format.
 
 ## [Feature Architecture](https://excalidraw.com/#json=Hlqtw8GuUCFSCZCelzZJO,_86q9cHY0TWeKRftAGwOgg)
 ![architecture](/architecture.png)

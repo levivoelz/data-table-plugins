@@ -8,7 +8,6 @@ export type Person = {
   visits: number
   progress: number
   status: 'relationship' | 'complicated' | 'single'
-  subRows?: Person[]
 }
 
 const range = (len: number) => {
@@ -42,7 +41,6 @@ export function makeData(...lens: number[]) {
       return {
         ...newPerson(),
         id: i,
-        subRows: lens[depth + 1] ? makeDataLevel(depth + 1) : undefined,
       }
     })
   }
