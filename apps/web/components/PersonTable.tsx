@@ -4,20 +4,16 @@ import React from "react";
 import { LoaderCircle } from "lucide-react";
 
 // import { mapCellTypeToColumns } from "@/lib/table-helpers";
-import { makeData, type Person } from "@/data/people";
+import { type Person } from "@/data/people";
+import { usePeople } from "@/hooks/usePeople";
 import { peopleTableStructure } from "@/data/people-table-structure";
 import tableLinkPlugin from "@/lib/table-link-plugin";
 import { DataTable } from "@workspace/ui/components/data-table";
 import { createPlugins } from "@workspace/ui/components/data-table/plugins";
 
 export function PersonTable() {
-  const [people, setPeople] = React.useState<Person[]>();
-  const plugins = createPlugins<Person>({ link: tableLinkPlugin.link });
-
-  React.useEffect(() => {
-    // TODO: Fetch this from the API
-    setPeople(makeData(10));
-  }, []);
+  const plugins = createPlugins({ link: tableLinkPlugin.link });
+  const people = usePeople();
 
   // dynamically assign cell types.
   // TODO: this will recalculate every time people changes. The data shape and types should be determined once at a higher level
@@ -29,10 +25,11 @@ export function PersonTable() {
   //   );
   // }, [people]);
 
+  // this maps the col type to the plugin
   const columns = Object.keys(peopleTableStructure).map((k) => {
     const col = peopleTableStructure[k]!;
-    const { name, type } = col;
-    return plugins[type](k, name);
+    const { pluginName, displayName } = col;
+    return plugins[pluginName](k, displayName);
   });
 
   if (!people || !columns)

@@ -1,12 +1,9 @@
-import { type ColumnDef } from "@tanstack/react-table";
 import textPlugin from "./plugins/text.js";
 import numberPlugin from "./plugins/number.js";
 import tagsPlugin from "./plugins/tags.js";
 
-type Plugin<T> = ColumnDef<T>;
-
-export function createPlugins<T>(
-  plugins?: any
+export function createPlugins(
+  plugins?: Record<string, any>
 ): Record<
   "text" | "number" | "tags" | string,
   any // TODO: fix this type

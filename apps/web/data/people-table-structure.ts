@@ -1,39 +1,43 @@
 type Assignment = {
-  type: "link" | "text" | "number" | "tags";
-  name: string;
+  pluginName: "link" | "text" | "number" | "tags";
+  displayName: string;
 };
 
+/**
+ * @description this is the data structure used to map source data keys to specific plugins
+ * and provides the header name.
+ */
 export const peopleTableStructure: Record<string, Assignment> = {
   id: {
-    type: "link",
-    name: "ID",
+    pluginName: "link",
+    displayName: "ID",
   },
   firstName: {
-    type: "text",
-    name: "First Name",
+    pluginName: "text",
+    displayName: "First Name",
   },
   lastName: {
-    type: "text",
-    name: "Last Name",
+    pluginName: "text",
+    displayName: "Last Name",
   },
   age: {
-    type: "number",
-    name: "Age",
+    pluginName: "number",
+    displayName: "Age",
   },
   visits: {
-    type: "number",
-    name: "Visits",
+    pluginName: "number",
+    displayName: "Visits",
   },
   progress: {
-    type: "number",
-    name: "Progress",
+    pluginName: "number",
+    displayName: "Progress",
   },
   status: {
-    type: "text",
-    name: "Status",
+    pluginName: "text",
+    displayName: "Status",
   },
   tags: {
-    type: "tags",
-    name: "Tags",
+    pluginName: "tags",
+    displayName: "Tags",
   },
 };
