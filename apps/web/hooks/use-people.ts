@@ -1,7 +1,8 @@
+import { Person } from "@/data/people";
 import { useEffect, useState } from "react";
 
 export function usePeople() {
-  const [people, setPeople] = useState();
+  const [people, setPeople] = useState<Person[]>([]);
 
   useEffect(() => {
     async function getPeople() {
@@ -12,7 +13,7 @@ export function usePeople() {
     }
 
     getPeople();
-  }, [])
+  }, []);
 
-  return people
+  return people;
 }

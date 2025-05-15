@@ -5,7 +5,7 @@ import { LoaderCircle } from "lucide-react";
 
 // import { mapCellTypeToColumns } from "@/lib/table-helpers";
 import { type Person } from "@/data/people";
-import { usePeople } from "@/hooks/usePeople";
+import { usePeople } from "@/hooks/use-people";
 import { peopleTableStructure } from "@/data/people-table-structure";
 import tableLinkPlugin from "@/lib/table-link-plugin";
 import { DataTable } from "@workspace/ui/components/data-table";

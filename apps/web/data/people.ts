@@ -1,7 +1,7 @@
 import { faker } from "@faker-js/faker";
 
 export type Person = {
-  id: [number, string];
+  id: number;
   firstName: string;
   lastName: string;
   age: number;
@@ -9,6 +9,7 @@ export type Person = {
   progress: number;
   status: "relationship" | "complicated" | "single";
   tags: string[];
+  avatar: string;
 };
 
 const range = (len: number) => {
@@ -20,10 +21,12 @@ const range = (len: number) => {
 };
 
 const newPerson = (): Person => {
+  const firstName = faker.person.firstName();
+  const lastName = faker.person.lastName();
   return {
-    id: [0, "/people/0"],
-    firstName: faker.person.firstName(),
-    lastName: faker.person.lastName(),
+    id: 0,
+    firstName: firstName,
+    lastName: lastName,
     age: faker.number.int(40),
     visits: faker.number.int(1000),
     progress: faker.number.int(100),
@@ -36,6 +39,7 @@ const newPerson = (): Person => {
       ["fun", "energetic", "loud", "talented", "funny"],
       2
     ),
+    avatar: `https://i.pravatar.cc/250?u=${firstName}+${lastName}`
   };
 };
 
@@ -45,7 +49,7 @@ export function makeData(...lens: number[]) {
     return range(len).map((d, i): Person => {
       return {
         ...newPerson(),
-        id: [i, `/people/${i}`],
+        id: i,
       };
     });
   };
