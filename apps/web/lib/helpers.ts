@@ -10,7 +10,6 @@ export function searchObj(arr: Record<string, any>[], query: string) {
   return arr.filter((obj) => {
     return Object.keys(obj).some((key) => {
       if (typeof obj[key] === "string") {
-        console.log(obj[key], query);
         return obj[key].toLocaleLowerCase().includes(query.toLocaleLowerCase());
       }
     });

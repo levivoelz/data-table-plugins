@@ -12,8 +12,6 @@ export async function GET(req: Request) {
   // Todo: use start and end in data table for server side pagination
   let people = PEOPLE.slice(Number(start), Number(end));
 
-  console.log(people.length)
-
   if (query) {
     people = searchObj(PEOPLE, query) as Person[];
   }
