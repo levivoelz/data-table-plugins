@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import * as React from "react";
 import { LoaderCircle } from "lucide-react";
 
 import { DataTable } from "@workspace/ui/components/data-table";
