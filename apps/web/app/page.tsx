@@ -18,8 +18,8 @@ export default function Page() {
         <div className="prose dark:prose-invert">
           <h1>People</h1>
           <p>
-            The person table's structure is defined on the fly based on cell
-            content. see components/person-table.tsx:19
+            The person table's structure is interpreted at runtime based on cell
+            content types. see components/person-table.tsx:19
           </p>
           <div className="not-prose">
             <PersonTable />
