@@ -1,9 +1,9 @@
 import * as React from "react";
 import {
-  ColumnDef,
-  Row,
-  Column,
-  Metadata,
+  type ColumnDef,
+  type Row,
+  type Column,
+  type Metadata,
 } from "@workspace/ui/components/data-table";
 import { MultipleSelector } from "@workspace/ui/components/multi-select";
 import { type Person } from "@/data/people";

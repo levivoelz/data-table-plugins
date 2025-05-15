@@ -1,4 +1,8 @@
-import { ColumnDef, Row, Column } from "@workspace/ui/components/data-table";
+import {
+  type ColumnDef,
+  type Row,
+  type Column,
+} from "@workspace/ui/components/data-table";
 
 function cell<T>(name: string) {
   return ({ row }: { row: Row<T> }) => {
