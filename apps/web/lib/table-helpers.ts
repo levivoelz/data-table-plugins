@@ -1,4 +1,4 @@
-type Row = Record<string, any>;
+type Row = Record<string, unknown>;
 type Col = {
   name: string;
   type: string;
@@ -68,7 +68,7 @@ function isURL(string: string) {
   
   try {
     url = new URL(string);
-  } catch (_) {
+  } catch {
     return false;  
   }
 

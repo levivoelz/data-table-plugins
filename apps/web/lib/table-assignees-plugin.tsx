@@ -1,24 +1,26 @@
 import * as React from "react";
+import Image from "next/image";
 import {
   type ColumnDef,
   type Row,
-  type Column,
   type Metadata,
 } from "@workspace/ui/components/data-table";
 import { MultipleSelector } from "@workspace/ui/components/multi-select";
 import { type Person } from "@/data/people";
 
-function UserBadge({ name, avatar }: { name: string; avatar: string }) {
+type UserBadgeProps = { name: string; avatar: string };
+
+function UserBadge({ name, avatar }: UserBadgeProps) {
   return (
     <div className="flex gap-1.5">
-      <img src={avatar} className="rounded-full w-4" />
+      <Image alt={`${name} avatar`} src={avatar} className="rounded-full w-4" />
       {name}
     </div>
   );
 }
 
 function cell<T>(name: string, metadata?: Metadata) {
-  return ({ row }: { row: Row<T> }) => {
+  return function CellComponent({ row }: { row: Row<T> }) {
     if (!metadata) {
       // due to createColumn overload having optional metadata, metadata has to be an optional type even though it's needed here
       throw new Error(
@@ -27,7 +29,7 @@ function cell<T>(name: string, metadata?: Metadata) {
     }
 
     const users = metadata.users as Person[];
-    const cellData = row.getValue(name) as any[];
+    const cellData = row.getValue(name) as UserBadgeProps[];
 
     return (
       <MultipleSelector
@@ -43,8 +45,8 @@ function cell<T>(name: string, metadata?: Metadata) {
   };
 }
 
-function header<T>(name: string) {
-  return ({ column }: { column?: Column<T> }) => {
+function header(name: string) {
+  return function HeaderComponent() {
     return <div>{name}</div>;
   };
 }
@@ -56,7 +58,7 @@ function createColumn<T>(
 ): ColumnDef<T> {
   return {
     accessorKey: name,
-    header: header<T>(headerName),
+    header: header(headerName),
     cell: cell<T>(name, metadata),
   };
 }

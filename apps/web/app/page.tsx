@@ -8,7 +8,7 @@ export default function Page() {
         <div className="prose dark:prose-invert">
           <h1>Tasks</h1>
           <p>
-            The tasks table gets it's structure from a config object. See
+            The tasks table gets it&apos;s structure from a config object. See
             data/tasks-table-structure.ts.
           </p>
           <div className="not-prose">
@@ -18,7 +18,7 @@ export default function Page() {
         <div className="prose dark:prose-invert">
           <h1>People</h1>
           <p>
-            The person table's structure is interpreted at runtime based on cell
+            The person table&apos;s structure is interpreted at runtime based on cell
             content types. see components/person-table.tsx:19
           </p>
           <div className="not-prose">

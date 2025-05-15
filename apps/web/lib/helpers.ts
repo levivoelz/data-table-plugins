@@ -6,7 +6,7 @@
  *
  * This fn does a shallow search of object keys with string values. It does not search any other type.
  */
-export function searchObj(arr: Record<string, any>[], query: string) {
+export function searchObj(arr: Record<string, unknown>[], query: string) {
   return arr.filter((obj) => {
     return Object.keys(obj).some((key) => {
       if (typeof obj[key] === "string") {

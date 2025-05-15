@@ -1,10 +1,10 @@
-import textPlugin from "./plugins/text.js";
-import numberPlugin from "./plugins/number.js";
-import tagsPlugin from "./plugins/tags.js";
 import { type ColumnDef } from "@tanstack/react-table";
-import { type Metadata, type createColumn } from "./plugins/types.js";
+import textPlugin from "@workspace/ui/components/data-table/plugins/text";
+import numberPlugin from "@workspace/ui/components/data-table/plugins/number";
+import tagsPlugin from "@workspace/ui/components/data-table/plugins/tags";
+import { type Metadata, type createColumn } from "@workspace/ui/components/data-table/types.js";
 
-type Plugins = Record<string, typeof createColumn>;
+type Plugins = Record<string, typeof createColumn>; 
 
 /**
  * If you are planning on designing your own plugin, see ./plugins/text.tsx for an example

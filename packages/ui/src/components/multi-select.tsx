@@ -3,13 +3,13 @@
 import * as React from "react";
 import { Check } from "lucide-react";
 
-import { cn } from "../lib/utils.js";
+import { cn } from "@workspace/ui/lib/utils";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "./tooltip.js";
+} from "@workspace/ui/components/tooltip";
 
 import {
   Command,
@@ -18,8 +18,8 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "./command.js";
-import { Popover, PopoverContent, PopoverTrigger } from "./popover.js";
+} from "@workspace/ui/components/command";
+import { Popover, PopoverContent, PopoverTrigger } from "@workspace/ui/components/popover";
 
 type Item = {
   value: string;

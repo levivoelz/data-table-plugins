@@ -3,7 +3,7 @@
 import * as React from "react";
 import { LoaderCircle } from "lucide-react";
 
-import { DataTable } from "@workspace/ui/components/data-table";
+import { DataTable } from "@workspace/ui/components/data-table/data-table";
 import {
   createPlugins,
   mapColTypeToPlugin,
@@ -39,7 +39,9 @@ export function TasksTable() {
           const user = users.find((u) => u.id === assigneeId);
 
           if (!user)
-            throw new Error(`User with id ${assigneeId} not found in user records`);
+            throw new Error(
+              `User with id ${assigneeId} not found in user records`
+            );
 
           return {
             id: user.id,

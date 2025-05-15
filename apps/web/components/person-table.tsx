@@ -7,7 +7,7 @@ import { mapCellTypeToColumns } from "@/lib/table-helpers";
 import { type Person } from "@/data/people";
 import { usePeople } from "@/hooks/use-people";
 import tableLinkPlugin from "@/lib/table-link-plugin";
-import { DataTable } from "@workspace/ui/components/data-table";
+import { DataTable } from "@workspace/ui/components/data-table/data-table";
 import { createPlugins } from "@workspace/ui/components/data-table/plugins";
 
 export function PersonTable() {
@@ -28,7 +28,7 @@ export function PersonTable() {
 
       throw new Error("Could not find Person col mapping for plugin");
     });
-  }, [people]);
+  }, [people, plugins]);
 
   if (!people || !columns) {
     return (
