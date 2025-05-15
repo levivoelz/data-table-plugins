@@ -15,8 +15,8 @@ function header<T>(name: string) {
 function createColumn<T>(name: string, headerName: string): ColumnDef<T> {
   return {
     accessorKey: name,
-    header: header(headerName),
-    cell: cell(name),
+    header: header<T>(headerName),
+    cell: cell<T>(name),
   };
 }
 

@@ -25,7 +25,8 @@ export function TasksTable() {
   const users = usePeople();
   const columns = mapColTypeToPlugin<TasksWithUsers>(
     tasksTableStructure,
-    plugins
+    plugins,
+    { users }
   );
 
   const tasksWithUsers = React.useMemo(() => {

@@ -2,19 +2,20 @@ import textPlugin from "./plugins/text.js";
 import numberPlugin from "./plugins/number.js";
 import tagsPlugin from "./plugins/tags.js";
 import { ColumnDef } from "@tanstack/react-table";
+import { Metadata, createColumn } from "./plugins/types.js";
 
-type Plugins = Record<string, any>;
+type Plugins = Record<string, typeof createColumn>;
 
 /**
  * If you are planning on designing your own plugin, see ./plugins/text.tsx for an example
  */
 export function createPlugins(
   plugins?: Plugins
-): Record<Assignment["pluginName"], Plugins> {
+): Record<Assignment["pluginName"], typeof createColumn> {
   return {
-    text: textPlugin.text,
-    number: numberPlugin.number,
-    tags: tagsPlugin.tags,
+    ...textPlugin,
+    ...numberPlugin,
+    ...tagsPlugin,
     ...plugins,
   };
 }
@@ -44,14 +45,15 @@ export type PluginAssignmentDef = Record<string, Assignment>;
  */
 export function mapColTypeToPlugin<T>(
   colType: PluginAssignmentDef,
-  plugins: Plugins
+  plugins: Plugins,
+  metadata?: Metadata
 ): ColumnDef<T>[] {
   const columns = Object.keys(colType).map((key) => {
     const col = colType[key]!;
     const { pluginName, displayName } = col;
-    const plugin = plugins[pluginName];
+    const plugin = plugins[pluginName] as typeof createColumn;
 
-    return plugin(key, displayName);
+    return plugin(key, displayName, metadata);
   });
 
   return columns;

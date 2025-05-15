@@ -4,7 +4,11 @@ function cell<T>(name: string) {
   return ({ row }: { row: Row<T> }) => {
     const value = row.getValue(name) as string;
 
-    return <a className="underline" href={value}>{value}</a>;
+    return (
+      <a className="underline" href={value}>
+        {value}
+      </a>
+    );
   };
 }
 
@@ -17,8 +21,8 @@ function header<T>(name: string) {
 function createColumn<T>(name: string, headerName: string): ColumnDef<T> {
   return {
     accessorKey: name,
-    cell: cell(name),
-    header: header(headerName),
+    cell: cell<T>(name),
+    header: header<T>(headerName),
   };
 }
 
