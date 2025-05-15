@@ -3,21 +3,27 @@ import { TasksTable } from "@/components/tasks-table";
 
 export default function Page() {
   return (
-    <div className="flex items-center justify-center min-h-svh">
-      <div className="min-w-2xl flex flex-col gap-8">
-        <div>
+    <div className="flex justify-center min-h-svh py-8">
+      <div className="flex flex-col gap-8">
+        <div className="prose dark:prose-invert">
           <h1>Tasks</h1>
           <p>
-            The tasks table gets it's structure from a config object. See data/tasks-table-structure.ts.
+            The tasks table gets it's structure from a config object. See
+            data/tasks-table-structure.ts.
           </p>
-          <TasksTable />
+          <div className="not-prose">
+            <TasksTable />
+          </div>
         </div>
-        <div>
+        <div className="prose dark:prose-invert">
           <h1>People</h1>
           <p>
-            The person table's structure is defined on the fly based on cell content. see components/person-table.tsx:19
+            The person table's structure is defined on the fly based on cell
+            content. see components/person-table.tsx:19
           </p>
-          <PersonTable />
+          <div className="not-prose">
+            <PersonTable />
+          </div>
         </div>
       </div>
     </div>
