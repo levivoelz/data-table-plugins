@@ -1,10 +1,18 @@
-import { makeData } from "@/data/people";
+import { searchObj } from "@/lib/helpers";
+import { makeData, type Person } from "@/data/people";
 
-const people = makeData(10);
+let people = makeData(10);
 
-export async function GET(request: Request) {
+export async function GET(req: Request) {
+  const url = new URL(req.url);
+  const query = url.searchParams.get("query");
+
+  if (query) {
+    people = searchObj(people, query) as Person[];
+  }
+
   return new Response(JSON.stringify(people), {
     status: 200,
-    headers: { 'Content-Type': 'application/json' }
+    headers: { "Content-Type": "application/json" },
   });
 }

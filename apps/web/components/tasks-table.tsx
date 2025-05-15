@@ -4,7 +4,10 @@ import React from "react";
 import { LoaderCircle } from "lucide-react";
 
 import { DataTable } from "@workspace/ui/components/data-table";
-import { createPlugins } from "@workspace/ui/components/data-table/plugins";
+import {
+  createPlugins,
+  mapColTypeToPlugin,
+} from "@workspace/ui/components/data-table/plugins";
 
 import { type Task } from "@/data/tasks";
 import { useTasks } from "@/hooks/use-tasks";
@@ -20,27 +23,27 @@ export function TasksTable() {
   });
   const tasks = useTasks();
   const users = usePeople();
-
-  // this maps the col type to the plugin
-  const columns = Object.keys(tasksTableStructure).map((k) => {
-    const col = tasksTableStructure[k]!;
-    const { pluginName, displayName } = col;
-
-    return plugins[pluginName](k, displayName);
-  });
+  const columns = mapColTypeToPlugin<TasksWithUsers>(
+    tasksTableStructure,
+    plugins
+  );
 
   const tasksWithUsers = React.useMemo(() => {
-    if (tasks.length === 0) return null;
+    if (tasks.length === 0 || users.length === 0) return null;
 
     return tasks.map((t) => {
       return {
         ...t,
-        assignees: t.assignees.map((a) => {
-          const user = users.find((u) => u.id === a);
+        assignees: t.assignees.map((assigneeId) => {
+          const user = users.find((u) => u.id === assigneeId);
+
+          if (!user)
+            throw new Error(`User with id ${assigneeId} not found in user records`);
 
           return {
-            name: `${user?.firstName} ${user?.lastName}`,
-            avatar: user?.avatar,
+            id: user.id,
+            name: `${user.firstName} ${user.lastName}`,
+            avatar: user.avatar,
           };
         }),
       };
@@ -49,17 +52,18 @@ export function TasksTable() {
 
   if (!columns || !tasksWithUsers) {
     return (
-      <div className="flex justify-center">
+      <div className="flex justify-center min-h-96 items-center">
         <LoaderCircle className="animate-spin" />
       </div>
     );
   }
 
-  return <DataTable<TasksWithUsers> columns={columns} rows={tasksWithUsers} />;
+  return <DataTable columns={columns} rows={tasksWithUsers} />;
 }
 
 type TasksWithUsers = Overwrite<
   Task,
-  { assignees?: { name: string; avatar?: string }[] }
+  { assignees: { id: number; name: string; avatar?: string }[] }
 >;
+
 type Overwrite<T, U> = Pick<T, Exclude<keyof T, keyof U>> & U;

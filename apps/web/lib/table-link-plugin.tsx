@@ -2,10 +2,9 @@ import { ColumnDef, Row, Column } from "@workspace/ui/components/data-table";
 
 function cell<T>(name: string) {
   return ({ row }: { row: Row<T> }) => {
-    const value = row.getValue(name) as number;
+    const value = row.getValue(name) as string;
 
-    // TODO: dynamically insert route
-    return <a href={`/tasks/${value}`}>{value}</a>;
+    return <a className="underline" href={value}>{value}</a>;
   };
 }
 

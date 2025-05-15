@@ -1,13 +1,20 @@
 import { Person } from "@/data/people";
 import { useEffect, useState } from "react";
 
-export function usePeople() {
+export function usePeople(query?: string) {
   const [people, setPeople] = useState<Person[]>([]);
 
   useEffect(() => {
     async function getPeople() {
-      const res = await fetch("/api/people");
-      const data = await res.json();
+      let params;
+
+      if (query) {
+        params = new URLSearchParams({ query });
+      }
+
+      const baseURL = "/api/people";
+      const url = params ? `${baseURL}?${params.toString()}` : baseURL;
+      const data = await fetch(url).then((r) => r.json());
 
       setPeople(data);
     }

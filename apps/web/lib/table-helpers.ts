@@ -43,6 +43,10 @@ export function mapCellTypeToColumns(row: Row): Col[] {
  */
 function mapTypeToPlugin(type: string, value: unknown) {
   if (type === "string") {
+    if (isURL(value as string)) {
+      return "link"
+    }
+
     return "text";
   }
 
@@ -57,4 +61,16 @@ function mapTypeToPlugin(type: string, value: unknown) {
   }
 
   return "text";
+}
+
+function isURL(string: string) {
+  let url;
+  
+  try {
+    url = new URL(string);
+  } catch (_) {
+    return false;  
+  }
+
+  return url.protocol === "http:" || url.protocol === "https:";
 }

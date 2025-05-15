@@ -1,0 +1,113 @@
+"use client";
+
+import * as React from "react";
+import { Check } from "lucide-react";
+
+import { cn } from "../lib/utils.js";
+
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "./command.js";
+import { Popover, PopoverContent, PopoverTrigger } from "./popover.js";
+
+type Item = {
+  value: string;
+  label: string | React.ReactNode;
+};
+
+type MultipleSelectorProps = {
+  list: Item[];
+  defaultValues: string[];
+  truncateValues?: boolean;
+  placeholder?: string;
+};
+
+export function MultipleSelector({
+  list,
+  defaultValues,
+  truncateValues,
+  placeholder,
+}: MultipleSelectorProps) {
+  const [open, setOpen] = React.useState(false);
+  const [values, setValues] = React.useState<string[]>(defaultValues || []);
+
+  const handleSetValue = (val: string) => {
+    if (values.includes(val)) {
+      values.splice(values.indexOf(val), 1);
+      const newValues = values.filter((value) => value !== val);
+      setValues(newValues);
+    } else {
+      setValues((prevValues) => [...prevValues, val]);
+    }
+  };
+
+  function renderSelected() {
+    const _values = truncateValues ? values.slice(0, 1) : values;
+
+    if (_values.length === 0) return placeholder ?? "Choose item";
+
+    return (
+      <>
+        {_values.map((val, i) => (
+          <div
+            key={i}
+            className="rounded-xl border bg-background text-xs font-medium hover:cursor-pointer"
+          >
+            {list.find((item) => item.value === val)?.label}
+          </div>
+        ))}
+        {truncateValues && values.length > 1 ? `+ ${values.length - 1}` : ""}
+      </>
+    );
+  }
+
+  return (
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger asChild>
+        <div
+          role="combobox"
+          aria-expanded={open}
+          className="justify-between p-0"
+        >
+          <div className="flex gap-2 justify-start">{renderSelected()}</div>
+        </div>
+      </PopoverTrigger>
+      <PopoverContent className="p-0 bg-background">
+        <Command>
+          <CommandInput placeholder="Search" />
+          <CommandEmpty>No item found.</CommandEmpty>
+          <CommandGroup>
+            <CommandList>
+              {list.map((item) => {
+                return (
+                  <CommandItem
+                    key={item.value}
+                    value={item.value}
+                    onSelect={() => {
+                      handleSetValue(item.value);
+                    }}
+                  >
+                    <Check
+                      className={cn(
+                        "mr-2 h-4 w-4",
+                        values.includes(item.value)
+                          ? "opacity-100"
+                          : "opacity-0"
+                      )}
+                    />
+                    {item.label}
+                  </CommandItem>
+                );
+              })}
+            </CommandList>
+          </CommandGroup>
+        </Command>
+      </PopoverContent>
+    </Popover>
+  );
+}
