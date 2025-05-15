@@ -52,17 +52,17 @@ export function MultipleSelector({
     if (_values.length === 0) return placeholder ?? "Choose item";
 
     return (
-      <>
+      <div className="flex items-center gap-1">
         {_values.map((val, i) => (
           <div
             key={i}
-            className="rounded-xl border bg-background text-xs font-medium hover:cursor-pointer"
+            className="rounded-full border bg-background text-xs font-medium hover:cursor-pointer p-0.5 pr-1"
           >
             {list.find((item) => item.value === val)?.label}
           </div>
         ))}
         {truncateValues && values.length > 1 ? `+ ${values.length - 1}` : ""}
-      </>
+      </div>
     );
   }
 

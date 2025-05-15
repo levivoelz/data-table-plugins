@@ -10,7 +10,7 @@ import { type Person } from "@/data/people";
 
 function UserBadge({ name, avatar }: { name: string; avatar: string }) {
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-1.5">
       <img src={avatar} className="rounded-full w-4" />
       {name}
     </div>
