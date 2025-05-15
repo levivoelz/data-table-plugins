@@ -4,6 +4,12 @@ import * as React from "react";
 import { Check } from "lucide-react";
 
 import { cn } from "../lib/utils.js";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "./tooltip.js";
 
 import {
   Command,
@@ -48,6 +54,7 @@ export function MultipleSelector({
 
   function renderSelected() {
     const _values = truncateValues ? values.slice(0, 1) : values;
+    const rest = values.slice(1, values.length);
 
     if (_values.length === 0) return placeholder ?? "Choose item";
 
@@ -61,7 +68,18 @@ export function MultipleSelector({
             {list.find((item) => item.value === val)?.label}
           </div>
         ))}
-        {truncateValues && values.length > 1 ? `+ ${values.length - 1}` : ""}
+        {truncateValues && values.length > 1 ? (
+          <OtherItemsTooltip
+            list={
+              rest.map((val) =>
+                list.find((item) => item.value === val)
+              ) as Item[]
+            }
+            label={`+ ${values.length - 1}`}
+          />
+        ) : (
+          ""
+        )}
       </div>
     );
   }
@@ -109,5 +127,25 @@ export function MultipleSelector({
         </Command>
       </PopoverContent>
     </Popover>
+  );
+}
+
+type OtherItemsTooltipProps = {
+  list: Item[];
+  label: string;
+};
+
+function OtherItemsTooltip({ list, label }: OtherItemsTooltipProps) {
+  return (
+    <TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger>{label}</TooltipTrigger>
+        <TooltipContent>
+          <div className="flex items-center justify-center gap-2">
+            {list.map((item) => item.label)}
+          </div>
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
   );
 }
