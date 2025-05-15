@@ -12,7 +12,7 @@ import { createPlugins } from "@workspace/ui/components/data-table/plugins";
 
 export function PersonTable() {
   const plugins = createPlugins({ link: tableLinkPlugin.link });
-  const people = usePeople();
+  const { people } = usePeople(0, 100);
 
   // dynamically assign cell types.
   // PERF WARNING: this will recalculate every time people changes. The data shape and types should be determined once at a higher level
@@ -30,12 +30,13 @@ export function PersonTable() {
     });
   }, [people]);
 
-  if (!people || !columns)
+  if (!people || !columns) {
     return (
       <div className="flex justify-center">
         <LoaderCircle className="animate-spin" />
       </div>
     );
+  }
 
   return <DataTable<Person> columns={columns} rows={people} />;
 }

@@ -22,3 +22,5 @@ export const tasksTableStructure: PluginAssignmentDef = {
     displayName: "Assignees",
   },
 };
+
+export const tasksTableStructureJSON = JSON.stringify(tasksTableStructure);

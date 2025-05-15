@@ -1,13 +1,12 @@
 "use client";
 
 import {
-  ColumnDef,
   flexRender,
   getCoreRowModel,
+  getPaginationRowModel,
   useReactTable,
+  type ColumnDef,
 } from "@tanstack/react-table";
-
-export { type ColumnDef } from "@tanstack/react-table"
 
 import {
   Table,
@@ -17,10 +16,11 @@ import {
   TableHeader,
   TableRow,
 } from "@workspace/ui/components/table";
+import { Button } from "@workspace/ui/components/button";
 
 type DataTableProps<T> = {
   rows: T[];
-  columns: ColumnDef<T, any>[]
+  columns: ColumnDef<T, any>[];
 };
 
 export function DataTable<T>({ rows, columns }: DataTableProps<T>) {
@@ -28,6 +28,7 @@ export function DataTable<T>({ rows, columns }: DataTableProps<T>) {
     data: rows,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
   });
 
   return (
@@ -81,6 +82,24 @@ export function DataTable<T>({ rows, columns }: DataTableProps<T>) {
             )}
           </TableBody>
         </Table>
+      </div>
+      <div className="flex items-center justify-end space-x-2 py-4">
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => table.previousPage()}
+          disabled={!table.getCanPreviousPage()}
+        >
+          Previous
+        </Button>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => table.nextPage()}
+          disabled={!table.getCanNextPage()}
+        >
+          Next
+        </Button>
       </div>
     </div>
   );

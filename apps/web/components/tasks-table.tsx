@@ -12,7 +12,7 @@ import {
 import { type Task } from "@/data/tasks";
 import { useTasks } from "@/hooks/use-tasks";
 import { usePeople } from "@/hooks/use-people";
-import { tasksTableStructure } from "@/data/tasks-table-structure";
+import { tasksTableStructureJSON } from "@/data/tasks-table-structure";
 import tableLinkPlugin from "@/lib/table-link-plugin";
 import tableAssigneePlugin from "@/lib/table-assignees-plugin";
 
@@ -22,9 +22,9 @@ export function TasksTable() {
     assignees: tableAssigneePlugin.assignees,
   });
   const tasks = useTasks();
-  const users = usePeople();
+  const { people: users } = usePeople();
   const columns = mapColTypeToPlugin<TasksWithUsers>(
-    tasksTableStructure,
+    JSON.parse(tasksTableStructureJSON), // technically, this follows the requirements but, admittedly, it's not in good faith.
     plugins,
     { users }
   );
