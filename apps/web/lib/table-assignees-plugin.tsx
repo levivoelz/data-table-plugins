@@ -13,7 +13,14 @@ type UserBadgeProps = { name: string; avatar: string };
 function UserBadge({ name, avatar }: UserBadgeProps) {
   return (
     <div className="flex gap-1.5">
-      <Image alt={`${name} avatar`} src={avatar} className="rounded-full w-4" />
+      <Image
+        alt={`${name} avatar`}
+        src={avatar}
+        className="rounded-full w-4"
+        unoptimized
+        width={50}
+        height={50}
+      />
       {name}
     </div>
   );
