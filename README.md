@@ -1,5 +1,7 @@
 # Deep Origin Frontend Technical Assessment
-[https://deep-origin-fe-assessment-web.vercel.app/](https://deep-origin-fe-assessment-web.vercel.app/)
+[Demo](https://deep-origin-fe-assessment-web.vercel.app/)
+
+[Data Table Docs](/packages/ui/src/components/data-table/README.md)
 
 ## Stack Choices
 
@@ -28,7 +30,7 @@ While I like the ease of use the plugin structure provides, there are some drawb
 
 Data tables are complex mechanisms and it's difficult to build a truly reusable data table that fits a range of scenarios. While it is a fun exercise, I wouldn't recommend a plugable data table from a practical standpoint. There are too many edge cases to consider and it's really not that difficult to take a declarative approach to building up a DT for each use case.
 
-## [Feature Architecture](https://excalidraw.com/#json=Hlqtw8GuUCFSCZCelzZJO,_86q9cHY0TWeKRftAGwOgg)
+## [Technical Design](https://excalidraw.com/#json=agodTQgik-73BYkqqr7kz,qCmAWYcMwlhyXp-Krm9JFA)
 ![architecture](/architecture.png)
 
 ## Requirements
@@ -44,25 +46,3 @@ pnpm i
 turbo dev
 ```
 Then, open [http://localhost:3000/](http://localhost:3000/)
-
-## Adding components
-
-To add components to your app, run the following command at the root of your `web` app:
-
-```bash
-pnpm dlx shadcn@latest add button -c apps/web
-```
-
-This will place the ui components in the `packages/ui/src/components` directory.
-
-## Tailwind
-
-Your `tailwind.config.ts` and `globals.css` are already set up to use the components from the `ui` package.
-
-## Using components
-
-To use the components in your app, import them from the `ui` package.
-
-```tsx
-import { Button } from "@workspace/ui/components/button"
-```
