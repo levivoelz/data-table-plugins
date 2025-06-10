@@ -1,5 +1,5 @@
 # Data Table Plugins
-[Demo](https://deep-origin-fe-assessment-web.vercel.app/)
+[Demo](https://data-table-plugins.vercel.app/)
 
 [Data Table Docs](/packages/ui/src/components/data-table/README.md)
 
@@ -41,7 +41,7 @@ Data tables are complex mechanisms and it's difficult to build a truly reusable 
 ## Installation
 First, clone this repo `git clone git@github.com:levivoelz/deep-origin-fe-assessment.git`
 ```bash
-cd deep-origin-fe-assessment
+cd data-table-plugins
 pnpm i
 turbo dev
 ```
