@@ -1,4 +1,4 @@
-# Deep Origin Frontend Technical Assessment
+# Data Table Plugins
 [Demo](https://deep-origin-fe-assessment-web.vercel.app/)
 
 [Data Table Docs](/packages/ui/src/components/data-table/README.md)
